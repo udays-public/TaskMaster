@@ -22,3 +22,5 @@ jobs:
         java-version: 1.11
     - name: Build with Maven
       run: mvn -B package --file taskservice/pom.xml -Dmaven.test.skip=true
+    - name: Build the Docker image
+      run: docker build taskservice/ --file taskservice/Dockerfile --tag taskservice:$(date +%s)
