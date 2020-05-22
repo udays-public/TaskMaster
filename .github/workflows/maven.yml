@@ -48,6 +48,8 @@ jobs:
         with:
           name: jarpack                   # The jar package will be checkout: jarpack/...jar
           path: ./taskservice/target
+      - name: Display structure of downloaded files
+        run: ls -R
       - name: Build the Docker image
         uses: docker/build-push-action@v1
         with:
