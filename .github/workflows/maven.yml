@@ -46,7 +46,7 @@ jobs:
       - name: Download jar for job 2
         uses: actions/download-artifact@v1
         with:
-          name: jarpack                   # The jar package will be checkout: jarpack/...jar 
+          name: taskservice/target                   # The jar package will be checkout: jarpack/...jar 
       - name: Build the Docker image
         uses: docker/build-push-action@v1
         with:
@@ -54,5 +54,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           dockerfile: taskservice/Dockerfile
           repository: udayspublic/taskservice
-          build_args: JAR_FILE=$GITHUB_WORKSPACE/jarpack/*.jar 
           tags: 1.0
