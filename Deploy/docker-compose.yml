@@ -1,0 +1,81 @@
+version: '3'
+services:
+  taskdb:
+    image: postgres:12
+    volumes:
+      - taskdb-data:/var/lib/postgresql/data
+      - ./pg-init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: taskdb
+      POSTGRES_USER: taskmaster-admin
+      POSTGRES_PASSWORD: 1nf0M@t1cs
+    networks:
+     - docker-network
+#  webui:
+#    image: taskmaster-ui:latest
+#    ports:
+#    - '4200:80'
+#    networks:
+#     - docker-network
+#  keycloak:
+#    image: quay.io/keycloak/keycloak:latest
+#    environment:
+#      DB_VENDOR: POSTGRES
+#      DB_ADDR: haraajudb
+#      DB_DATABASE: keycloak
+#      DB_USER: haraaju-admin
+#      DB_SCHEMA: public
+#      DB_PASSWORD: 1nf0M@t1cs
+#      KEYCLOAK_USER: admin
+#      KEYCLOAK_PASSWORD: keycloak
+#      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+#      #JDBC_PARAMS: "ssl=true"
+#    ports:
+#      - 9080:8080
+#    depends_on:
+#      - haraajudb
+#    networks:
+#     - docker-network
+
+  # api:
+  #   image:  api-gateway:latest
+  #   ports:
+  #   - '9000:9000'
+  #   networks:
+  #   - docker-network
+  #   depends_on: 
+  #   - consul
+      
+#  taskservice:
+#    image:  taskservice:latest
+#    ports:
+#    - '8080:8080'
+#    depends_on:
+##    - consul
+#    - taskdb
+#    networks:
+#     - docker-network
+      
+#  consul:
+#    image: bitnami/consul:1
+#    volumes:
+#      - consul_data:/bitnami/consul
+#    ports:
+#      - '8300:8300'
+#      - '8301:8301'
+#      - '8301:8301/udp'
+#      - '8500:8500'
+#      - '8600:8600'
+#      - '8600:8600/udp'
+#    networks:
+#     - docker-network
+#
+volumes:
+  taskdb-data:
+#  consul_data:
+
+networks:
+  docker-network:
+    driver: bridge
