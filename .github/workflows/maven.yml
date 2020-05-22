@@ -32,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
           name: jarpack
-          path: ./target    
+          path: ./taskservice/target    
     
     
   publish:
