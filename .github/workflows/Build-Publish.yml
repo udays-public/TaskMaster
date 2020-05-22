@@ -34,7 +34,7 @@ jobs:
     - name: Upload jar for job 1
       uses: actions/upload-artifact@v1
       with:
-          name: jarpack
+          name: taskservice-jar
           path: ./taskservice/target    
     
     
@@ -47,10 +47,10 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Download jar for job 2
+      - name: Download jar for taskservice
         uses: actions/download-artifact@v1
         with:
-          name: jarpack                   # The jar package will be checkout: jarpack/...jar
+          name: taskservice-jar                   # The jar package will be checkout: jarpack/...jar
           path: ./target
 
       - name: Build the Docker image
