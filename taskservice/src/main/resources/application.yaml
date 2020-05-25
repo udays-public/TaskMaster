@@ -4,6 +4,6 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: "jdbc:postgresql://localhost:5432/taskdb"
+    url: "jdbc:postgresql://${TASK_DB_HOST}:5432/taskdb"
     username: taskmaster-admin
     password: 1nf0M@t1cs
