@@ -48,15 +48,18 @@ services:
   #   depends_on: 
   #   - consul
       
-#  taskservice:
-#    image:  taskservice:latest
-#    ports:
-#    - '8080:8080'
-#    depends_on:
+  taskservice:
+    image:  udayspublic/taskservice:latest
+    ports:
+    - '8080:8080'
+    depends_on:
 ##    - consul
-#    - taskdb
-#    networks:
-#     - docker-network
+    - taskdb
+    environment:
+    - TASK_DB_HOST=taskdb
+
+    networks:
+     - docker-network
       
 #  consul:
 #    image: bitnami/consul:1

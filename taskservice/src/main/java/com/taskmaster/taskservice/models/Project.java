@@ -15,6 +15,7 @@ import java.util.Set;
 @EntityListeners(AuditingEntityListener.class)
 public class Project {
 
+    public Project(){}
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
