@@ -4,10 +4,8 @@ import com.taskmaster.taskservice.models.Project;
 import com.taskmaster.taskservice.services.ProjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,15 +36,13 @@ public class ProjectController {
 
     @PutMapping("/{projectId}")
     @ApiOperation("Update Project resource ")
-    Project Update(@ApiParam( name = "ID of the project",
-            type = "long", required = true) @PathVariable String projectId, @RequestBody Project request) {
+    Project Update(@PathVariable String projectId, @RequestBody Project request) {
         return projectService.update(projectId, request);
     }
 
     @GetMapping("/{projectId}")
     @ApiOperation("Get Project resource by Id")
-    Optional<Project> GetProject(@ApiParam( name = "ID of the project",
-            type = "long", required = true) @PathVariable String projectId) {
+    Optional<Project> GetProject(@PathVariable String projectId) {
         var projId = Long.parseLong(projectId);
         return projectService.findById(projId);
 
@@ -54,10 +50,7 @@ public class ProjectController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{projectId}")
-    @ApiOperation("Deletes the project represented by Id")
-    void Delete(@ApiParam( name = "ID of the project",
-    type = "long", required = true)
-            @PathVariable String projectId) {
+    void Delete(@PathVariable String projectId) {
         var projId = Long.parseLong(projectId);
         projectService.deleteById(projId);
 

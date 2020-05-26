@@ -8,7 +8,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_MULTIPLE_DATABASES: taskdb,keycloakdb
+      POSTGRES_MULTIPLE_DATABASES: taskdb
       POSTGRES_USER: taskmaster-admin
       POSTGRES_PASSWORD: 1nf0M@t1cs
     networks:
@@ -19,25 +19,25 @@ services:
 #    - '4200:80'
 #    networks:
 #     - docker-network
-  keycloak:
-   image: quay.io/keycloak/keycloak:latest
-   environment:
-     DB_VENDOR: POSTGRES
-     DB_ADDR: taskdb
-     DB_DATABASE: keycloakdb
-     DB_USER: taskmaster-admin
-     DB_SCHEMA: public
-     DB_PASSWORD: 1nf0M@t1cs
-     KEYCLOAK_USER: admin
-     KEYCLOAK_PASSWORD: keycloak
-     # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
-     #JDBC_PARAMS: "ssl=true"
-   ports:
-     - 9080:8080
-   depends_on:
-     - taskdb
-   networks:
-    - docker-network
+#  keycloak:
+#    image: quay.io/keycloak/keycloak:latest
+#    environment:
+#      DB_VENDOR: POSTGRES
+#      DB_ADDR: haraajudb
+#      DB_DATABASE: keycloak
+#      DB_USER: haraaju-admin
+#      DB_SCHEMA: public
+#      DB_PASSWORD: 1nf0M@t1cs
+#      KEYCLOAK_USER: admin
+#      KEYCLOAK_PASSWORD: keycloak
+#      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+#      #JDBC_PARAMS: "ssl=true"
+#    ports:
+#      - 9080:8080
+#    depends_on:
+#      - haraajudb
+#    networks:
+#     - docker-network
 
   # api:
   #   image:  api-gateway:latest
@@ -51,7 +51,7 @@ services:
   taskservice:
     image:  udayspublic/taskservice:latest
     ports:
-    - '5080:8080'
+    - '8080:8080'
     depends_on:
 ##    - consul
     - taskdb
