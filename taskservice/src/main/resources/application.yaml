@@ -17,8 +17,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://${KEYCLOAK_HOST}:{KEYCLOAK_PORT}/auth/realms/taskmaster
-          jwk-set-uri: http://${KEYCLOAK_HOST}:{KEYCLOAK_PORT}/auth/realms/taskmaster/protocol/openid-connect/certs
+          issuer-uri: http://${KEYCLOAK_HOST}:${KEYCLOAK_PORT}/auth/realms/taskmaster
+          jwk-set-uri: http://${KEYCLOAK_HOST}:${KEYCLOAK_PORT}/auth/realms/taskmaster/protocol/openid-connect/certs
 
 logging:
   level:
