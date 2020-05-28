@@ -45,7 +45,7 @@ class ProjectControllerTest {
 
         project = new Project("office","office work");
 
-        Mockito.when(service.findAll()).thenReturn(List.of(project));
+        Mockito.when(service.findAll("")).thenReturn(List.of(project));
         Mockito.when(service.save(any(Project.class))).thenReturn(project);
     }
 

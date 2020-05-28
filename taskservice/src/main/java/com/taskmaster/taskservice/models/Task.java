@@ -16,6 +16,15 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class Task {
 
+    public enum State {
+
+        PENDING,
+        INPROGRESS,
+        COMPLETED,
+        DELETED
+    }
+
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @ReadOnlyProperty

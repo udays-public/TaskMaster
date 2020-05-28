@@ -1,6 +1,7 @@
 package com.taskmaster.taskservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.ReadOnlyProperty;
@@ -26,6 +27,10 @@ public class Project {
 
     private String description;
 
+    @Column(name = "created_by",nullable = false)
+    @CreatedBy
+    private String createdBy;
+
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false,updatable = false)
@@ -38,6 +43,8 @@ public class Project {
     @LastModifiedDate
     @JsonIgnore
     private Date lastModifiedTime;
+
+
 
     public Project(String name, String description) {
         this.name = name;
@@ -65,4 +72,7 @@ public class Project {
     }
 
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
 }

@@ -3,6 +3,7 @@ package com.taskmaster.taskservice.services;
 import com.taskmaster.taskservice.models.Project;
 import com.taskmaster.taskservice.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +23,14 @@ public class ProjectService {
 
     }
 
-    public List<Project> findAll() {
-        return repo.findAll();
+
+    public boolean checkOwner(String projectId, Authentication authentication)
+    {
+        return repo.getOne(Long.parseLong(projectId)).getCreatedBy() .equals(authentication.getName());
+    }
+
+    public List<Project> findAll(String name) {
+        return repo.findByCreatedBy(name);
     }
 
     public Optional<Project> findById(long projectId) {

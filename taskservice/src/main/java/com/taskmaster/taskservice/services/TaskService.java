@@ -1,6 +1,5 @@
 package com.taskmaster.taskservice.services;
 
-import com.taskmaster.taskservice.models.State;
 import com.taskmaster.taskservice.models.Task;
 import com.taskmaster.taskservice.repository.ProjectRepository;
 import com.taskmaster.taskservice.repository.TaskRepository;
@@ -23,7 +22,7 @@ public class TaskService {
         return projectRepo.findById(Long.parseLong(projectid)).map(project -> {
             // TODO : Do some validation
             task.setProject(project);
-            task.setState(State.PENDING);
+            task.setState(Task.State.PENDING);
             return repo.save(task);
         }).orElseThrow(() -> new RuntimeException(String.format(" project by Id: {} not found ", projectid)));
     }

@@ -1,10 +1,10 @@
 package com.taskmaster.taskservice.controllers;
 
-import com.taskmaster.taskservice.models.State;
 import com.taskmaster.taskservice.models.Task;
 import com.taskmaster.taskservice.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class TasksController {
     TaskService service;
 
     @PostMapping("/projects/{projectid}/tasks")
-    Task Create(@PathVariable String projectid, @RequestBody Task task) {
+    Task Create(@PathVariable String projectid, @RequestBody Task task, Authentication authentication) {
         return service.create(projectid,task);
     }
 

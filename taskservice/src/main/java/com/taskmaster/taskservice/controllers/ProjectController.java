@@ -6,6 +6,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,12 +32,13 @@ public class ProjectController {
 
     @GetMapping("/")
     @ApiOperation("Get All Project resources ")
-    List<Project> GetAll() {
-        return projectService.findAll();
+    List<Project> GetAll(Authentication authentication) {
+        return projectService.findAll(authentication.getName());
     }
 
     @PutMapping("/{projectId}")
     @ApiOperation("Update Project resource ")
+    @PreAuthorize("@projectService.checkOwner(#projectId,authentication)")
     Project Update(@PathVariable String projectId, @RequestBody Project request) {
         return projectService.update(projectId, request);
     }
@@ -50,6 +53,7 @@ public class ProjectController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{projectId}")
+    @PreAuthorize("@projectService.checkOwner(#projectId,authentication)")
     void Delete(@PathVariable String projectId) {
         var projId = Long.parseLong(projectId);
         projectService.deleteById(projId);

@@ -52,7 +52,7 @@ class ProjectServiceTest {
     void findAll() {
         given(repo.findAll()).willReturn(List.of(project));
 
-        List<Project> all = service.findAll();
+        List<Project> all = service.findAll("");
 
         assertThat(all).isNotNull();
         assertEquals(1, all.size());
