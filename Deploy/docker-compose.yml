@@ -13,6 +13,7 @@ services:
       POSTGRES_PASSWORD: 1nf0M@t1cs
     networks:
       - docker-network
+  
   keycloak:
    image: quay.io/keycloak/keycloak:latest
    environment:
@@ -34,13 +35,13 @@ services:
   taskservice:
     image:  udayspublic/taskservice:latest
     ports:
-    - '8080:8080'
+    - '5080:5080'
     depends_on:
     - taskdb
     - keycloak
     environment:
     - TASK_DB_HOST=taskdb
-
+    - KEYCLOAK_HOST=keycloak
     networks:
      - docker-network
       
